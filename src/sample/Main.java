@@ -21,19 +21,24 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         int width = 1280;
         int height = 960;
-
-        Ship ship = new Ship(width/ 2, height/ 2);
-
         Pane pane = new Pane();
         pane.setPrefSize(width, height);
         pane.setStyle("-fx-background-color: #0b2651;");
 
+        Ship ship = new Ship(width/ 2, height/ 2);
+
+        Asteroid asteroid = new Asteroid(50,50);
 
 
 
-        pane.getChildren().add(ship.getShip());
 
 
+        pane.getChildren().addAll(ship.getCreature(), asteroid.getCreature());
+
+        asteroid.moveRight();
+        asteroid.moveRight();
+        asteroid.jump();
+        asteroid.jump();
 
         Text text = new Text(20, 20, "Game");
         text.setFont(Font.font("Verdana", 15));
@@ -53,14 +58,15 @@ public class Main extends Application {
         scene.setOnKeyReleased(e -> {
             keyPressed.put(e.getCode(), Boolean.FALSE);
         });
-        Point2D liike = new Point2D(1, 0);
 
 
         new AnimationTimer(){
 
             @Override
             public void handle(long now) {
+
                 if (keyPressed.getOrDefault(KeyCode.LEFT, false)) {
+
                     ship.moveLeft();
                 }
                 if (keyPressed.getOrDefault(KeyCode.RIGHT, false)) {
@@ -69,6 +75,7 @@ public class Main extends Application {
                 if (keyPressed.getOrDefault(KeyCode.UP, false)) {
                     ship.jump();
                 }
+                asteroid.move();
                 ship.move();
             }
         }.start();
