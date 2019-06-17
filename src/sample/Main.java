@@ -1,21 +1,26 @@
 
 package sample;
 
-        import javafx.animation.AnimationTimer;
-        import javafx.application.Application;
-        import javafx.geometry.Point2D;
-        import javafx.scene.Scene;
-        import javafx.scene.input.KeyCode;
-        import javafx.scene.layout.Pane;
-        import javafx.scene.paint.Color;
-        import javafx.scene.text.Font;
-        import javafx.scene.text.Text;
-        import javafx.stage.Stage;
+import javafx.animation.AnimationTimer;
+import javafx.application.Application;
+import javafx.geometry.Point2D;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-        import java.util.HashMap;
-        import java.util.Map;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends Application {
+
+    private Image image;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -24,13 +29,13 @@ public class Main extends Application {
         Pane pane = new Pane();
         pane.setPrefSize(width, height);
         pane.setStyle("-fx-background-color: #0b2651;");
-
-        Ship ship = new Ship(width/ 2, height/ 2);
-
-        Asteroid asteroid = new Asteroid(50,50);
+        Image image = new Image("file:assets/pics/ship.png");
 
 
 
+        Ship ship = new Ship(width / 2, height / 2, image);
+
+        Asteroid asteroid = new Asteroid(50, 50);
 
 
         pane.getChildren().addAll(ship.getCreature(), asteroid.getCreature());
@@ -60,7 +65,7 @@ public class Main extends Application {
         });
 
 
-        new AnimationTimer(){
+        new AnimationTimer() {
 
             @Override
             public void handle(long now) {

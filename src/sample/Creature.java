@@ -1,12 +1,15 @@
 package sample;
 
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 
 public abstract class Creature {
     private Polygon creature;
     private Point2D move;
+
 
 
     public Creature(Polygon polygon, int x, int y) {
@@ -16,6 +19,17 @@ public abstract class Creature {
         this.creature.setTranslateX(x);
         this.creature.setTranslateY(y);
 
+        this.move = new Point2D(0, 0);
+    }
+
+    public Creature(Polygon polygon, int x, int y, Image image) {
+        this.creature = polygon;
+
+
+
+        creature.setFill(new ImagePattern(image,0,0,1,1,true));
+        this.creature.setTranslateX(x);
+        this.creature.setTranslateY(y);
 
         this.move = new Point2D(0, 0);
     }
