@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 
 public abstract class Creature {
     private Polygon creature;
@@ -60,5 +61,10 @@ public abstract class Creature {
         Y *= 0.05;
 
         this.move = this.move.add(X, Y);
+    }
+    public boolean collision(Creature creature) {
+        Shape collinsionArea = Shape.intersect(this.creature, creature.getCreature());
+
+        return collinsionArea.getBoundsInLocal().getWidth() != -1;
     }
 }

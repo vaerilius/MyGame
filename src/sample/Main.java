@@ -32,7 +32,6 @@ public class Main extends Application {
         Image image = new Image("file:assets/pics/ship.png");
 
 
-
         Ship ship = new Ship(width / 2, height / 2, image);
 
         Asteroid asteroid = new Asteroid(50, 50);
@@ -82,6 +81,10 @@ public class Main extends Application {
                 }
                 asteroid.move();
                 ship.move();
+
+                if (ship.collision(asteroid)) {
+                    stop();
+                }
             }
         }.start();
 
