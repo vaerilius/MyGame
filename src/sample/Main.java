@@ -3,20 +3,16 @@ package sample;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main extends Application {
 
@@ -34,15 +30,18 @@ public class Main extends Application {
 
         Ship ship = new Ship(width / 2, height / 2, image);
 
-        Asteroid asteroid = new Asteroid(50, 50);
+
+        List<Asteroid> asteroids = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Random random = new Random();
+            Asteroid asteroid = new Asteroid(random.nextInt(1000), random.nextInt(400));
+            asteroids.add(asteroid);
+        }
 
 
-        pane.getChildren().addAll(ship.getCreature(), asteroid.getCreature());
+        pane.getChildren().add(ship.getCreature());
+        asteroids.forEach(asteroid -> pane.getChildren().addAll(asteroid.getCreature()));
 
-        asteroid.moveRight();
-        asteroid.moveRight();
-        asteroid.jump();
-        asteroid.jump();
 
         Text text = new Text(20, 20, "Game");
         text.setFont(Font.font("Verdana", 15));
@@ -79,12 +78,15 @@ public class Main extends Application {
                 if (keyPressed.getOrDefault(KeyCode.UP, false)) {
                     ship.jump();
                 }
-                asteroid.move();
+                asteroids.forEach(asteroid -> asteroid.move());
                 ship.move();
 
-                if (ship.collision(asteroid)) {
-                    stop();
-                }
+                asteroids.forEach(asteroid -> {
+                    if (ship.collision(asteroid)) {
+                        stop();
+                    }
+                });
+
             }
         }.start();
 
