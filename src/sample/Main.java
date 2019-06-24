@@ -63,8 +63,7 @@ public class Main extends Application {
         });
 
 
-        new AnimationTimer() {
-
+        new AnimationTimer() { // ihana testi kommentti <333
             @Override
             public void handle(long now) {
 
