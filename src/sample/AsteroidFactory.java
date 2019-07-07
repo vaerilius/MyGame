@@ -10,11 +10,12 @@ public class AsteroidFactory {
     public Polygon createPolygon() {
         Random random = new Random();
 
-        double size = 20 +random.nextInt(10);
+        double size = 10 +random.nextInt(10);
 
         Polygon polygon = new Polygon();
-        polygon.setFill(Color.rgb(random.nextInt(255),random.nextInt(255),
-                random.nextInt(255),random.nextDouble()));
+        polygon.setFill(Color.rgb(random.nextInt(255 ) ,random.nextInt(255) ,
+                random.nextInt(100),random.nextDouble()));
+
         double c1 = Math.cos(Math.PI * 2 / 5);
         double c2 = Math.cos(Math.PI / 5);
         double s1 = Math.sin(Math.PI * 2 / 5);
