@@ -2,7 +2,6 @@ package sample;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -11,12 +10,8 @@ public abstract class Creature {
     private Polygon creature;
     private Point2D move;
 
-
-
     public Creature(Polygon polygon, int x, int y) {
         this.creature = polygon;
-
-
         this.creature.setTranslateX(x);
         this.creature.setTranslateY(y);
 
@@ -25,8 +20,6 @@ public abstract class Creature {
 
     public Creature(Polygon polygon, int x, int y, Image image) {
         this.creature = polygon;
-
-
 
         creature.setFill(new ImagePattern(image,0,0,1,1,true));
         this.creature.setTranslateX(x);
@@ -51,6 +44,22 @@ public abstract class Creature {
     public void move() {
         this.creature.setTranslateX(this.creature.getTranslateX() + this.move.getX());
         this.creature.setTranslateY(this.creature.getTranslateY() + this.move.getY());
+        if (this.creature.getTranslateX() < 0) {
+            this.creature.setTranslateX(0);
+        }
+
+        if (this.creature.getTranslateX() > Main.HEIGHT) {
+            this.creature.setTranslateX( Main.HEIGHT );
+        }
+
+        if (this.creature.getTranslateY() < 0) {
+            this.creature.setTranslateY(0);
+        }
+
+        if (this.creature.getTranslateY() > Main.WIDTH) {
+            this.creature.setTranslateY(Main.WIDTH);
+        }
+
     }
 
     public void jump() {

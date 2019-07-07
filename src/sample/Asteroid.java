@@ -8,13 +8,13 @@ public class Asteroid extends Creature{
         super(new AsteroidFactory().createPolygon(), x, y);
         Random random = new Random();
 
-        super.getCreature().setRotate(random.nextInt(360));
+        super.getCreature().setRotate(random.nextInt(180));
 
         int speed = 1 + random.nextInt(10);
         for (int i = 0; i < speed; i++) {
             jump();
         }
-        this.rotation = 10 - random.nextDouble();
+        this.rotation = 2 - random.nextDouble();
     }
 
     @Override
